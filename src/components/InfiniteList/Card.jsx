@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getItemsByName, getUsersBySize } from "../../services/InfiniteService";
+import { getUsersBySize } from "../../services/InfiniteService";
 import InfiniteList from "../Skeletons/InfiniteList";
 
 
@@ -35,11 +35,14 @@ function Card() {
       document.getElementById("123").indeterminate = false;
       document.getElementById("123").checked = true;
     }
+    let foundTrue = items.filter((item) => item?.isChecked === true).length;
+     let foundFalse = items.filter((item) => item?.isChecked === false).length;
 
+     if (foundTrue > 0 && foundFalse > 0) {
+       document.getElementById("123").indeterminate = true;
+     }
     
-
-    
-  },[itemsLength,items,setItems,size,setSize])
+  },[setItems,items,setSize,size,itemsLength])
  
   const handleScroll = () => {
     if (
@@ -122,15 +125,15 @@ function Card() {
  };
 
  const getSelectAllValue =()=>{
-    let tar = document.getElementById("123");
+    // let tar = document.getElementById("123");
 
     console.log("in getSelectAllValue====",items.filter((item)=> item?.isChecked !==true).length)
     setItemsLength(items.filter((item)=> item?.isChecked ===true).length)
     console.log(itemsLength);
 
-    if(items.filter((item)=> item?.isChecked !==true).length === 0){
-      tar.value = false;
-    }
+    // if(items.filter((item)=> item?.isChecked !==true).length === 0){
+    //   tar.value = false;
+    // }
 
  }
 
@@ -156,7 +159,7 @@ function Card() {
       for (let i=0; i<items.length; i++){
         for (let j=0; j<prevItems.length; j++){
           if(items[i].id === prevItems[j].id){ 
-            prevItems[j].isChecked = true
+            prevItems[j].isChecked = items[i].isChecked;
             console.log(items);
             arr = prevItems;
             console.log(arr)
