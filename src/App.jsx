@@ -9,9 +9,9 @@ function App() {
       <div>
         <Header />
         <div className='flex flex-col justify-center items-center'>
-          <div>
-          {/* <h1 className='text-4xl font-bold '>Hello Ji This is Saini</h1> */}
-          </div>
+          {/* <div>
+          <h1 className='text-4xl font-bold '>Hello Ji This is Saini</h1>
+          </div> */}
           <Card />
         </div>
         <Footer />
